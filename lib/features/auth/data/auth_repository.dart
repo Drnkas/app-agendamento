@@ -6,7 +6,9 @@ import '../../../core/helpers/result.dart';
 
 class AuthRepository {
 
-  final AuthDatasource _datasource = AuthDatasource();
+  AuthRepository(this._datasource);
+
+  final AuthDatasource _datasource;
 
   User? user;
 

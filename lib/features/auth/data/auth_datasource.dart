@@ -6,18 +6,14 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../core/helpers/result.dart';
 
-class AuthDatasource {
+abstract class AuthDatasource {
+  Future<Result<LoginFailedResult, User>> login({required String email, required String password});
+}
+class RemoteAuthDatasource implements AuthDatasource {
 
-  final Dio _dio = Dio(
-      BaseOptions(
-          baseUrl: 'https://parseapi.back4app.com/functions',
-          headers: {
-            'X-Parse-Application-Id':'jAy4H6m42cTR9NsizOFvny60mBM9MAKTjsMVB6kT',
-            'X-Parse-REST-Api-Key':'pMllsmZ1qgGlpPx9yUU5Aaas5HLugAvl65B7XJRb'
-          }))..interceptors.addAll([
-            TokenInterceptor(),
-            PrettyDioLogger(requestHeader: true, requestBody: true),
-  ]);
+  RemoteAuthDatasource(this._dio);
+
+  final Dio _dio;
 
   Future<Result<LoginFailedResult, User>> login({required String email, required String password}) async {
     try{
@@ -29,7 +25,7 @@ class AuthDatasource {
       return Success(User.fromMap(response.data['result']));
 
     } on DioException catch (e) {
-
+;
       if(e.type == DioExceptionType.unknown){
         return const Failure(LoginFailedResult.offline);
       }else if(e.response?.statusCode == 404){

@@ -6,7 +6,9 @@ void main(){
   bootstrap(
     FlavorConfig(
         baseUrl: 'www.google.com.br',
-        flavor: AppFlavor.prod
+        flavor: AppFlavor.prod,
+        appId: '',
+        restKey: ''
     )
   );
 }
