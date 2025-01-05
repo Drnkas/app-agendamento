@@ -5,10 +5,10 @@ import 'app.dart';
 void main(){
   bootstrap(
     FlavorConfig(
-        baseUrl: 'www.google.com.br',
+        baseUrl: 'https://parseapi.back4app.com/functions',
         flavor: AppFlavor.prod,
-        appId: '',
-        restKey: ''
+        appId: 'jAy4H6m42cTR9NsizOFvny60mBM9MAKTjsMVB6kT',
+        restKey: 'pMllsmZ1qgGlpPx9yUU5Aaas5HLugAvl65B7XJRb'
     )
   );
 }

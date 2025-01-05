@@ -1,6 +1,10 @@
+import 'package:app_agendamento/core/firebase/crashlytics/app_crashlytics.dart';
+import 'package:app_agendamento/core/firebase/messaging/app_messaging.dart';
 import 'package:app_agendamento/core/flavor/flavor.dart';
 import 'package:app_agendamento/features/auth/data/auth_repository.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -9,7 +13,7 @@ import '../features/auth/data/auth_datasource.dart';
 
 final getIt = GetIt.I;
 
-Future<void> configDependecies(FlavorConfig config) async {
+Future<void> configureDependencies(FlavorConfig config) async {
   getIt.registerSingleton(config);
 
   getIt.registerSingleton(() => Dio(
@@ -27,4 +31,10 @@ Future<void> configDependecies(FlavorConfig config) async {
 
   getIt.registerSingleton(() => RemoteAuthDatasource(getIt()));
   getIt.registerSingleton(() => AuthRepository(getIt()));
+  
+  getIt.registerSingleton(FirebaseCrashlytics.instance);
+  getIt.registerSingleton(AppCrashlytics(getIt()));
+
+  getIt.registerSingleton(FirebaseMessaging.instance);
+  getIt.registerSingleton(AppMessaging(getIt()));
 }
