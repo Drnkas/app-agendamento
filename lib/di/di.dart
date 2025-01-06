@@ -1,4 +1,6 @@
 import 'package:app_agendamento/core/device/app_package_info.dart';
+import 'package:app_agendamento/core/device/app_preferences.dart';
+import 'package:app_agendamento/core/device/app_secure_storage.dart';
 import 'package:app_agendamento/core/firebase/crashlytics/app_crashlytics.dart';
 import 'package:app_agendamento/core/firebase/messaging/app_messaging.dart';
 import 'package:app_agendamento/core/firebase/remote_config/app_remote_config.dart';
@@ -8,8 +10,10 @@ import 'package:dio/dio.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/helpers/token_interceptor.dart';
 import '../features/auth/data/auth_datasource.dart';
@@ -19,7 +23,7 @@ final getIt = GetIt.I;
 Future<void> configureDependencies(FlavorConfig config) async {
   getIt.registerSingleton(config);
 
-  getIt.registerSingleton(() => Dio(
+  getIt.registerLazySingleton(() => Dio(
       BaseOptions(
           baseUrl: config.baseUrl,
           headers: {
@@ -32,8 +36,17 @@ Future<void> configureDependencies(FlavorConfig config) async {
     PrettyDioLogger(requestHeader: true, requestBody: true),
   ]));
 
-  getIt.registerSingleton(() => RemoteAuthDatasource(getIt()));
-  getIt.registerSingleton(() => AuthRepository(getIt()));
+  // Preferences
+  final preferences = await SharedPreferences.getInstance();
+  getIt.registerSingleton(preferences);
+  getIt.registerFactory(() => AppPreferences(getIt()));
+
+  // Secure Storage
+  getIt.registerFactory(() => const FlutterSecureStorage());
+  getIt.registerFactory(() => AppSecureStorage(getIt()));
+
+  getIt.registerFactory<AuthDatasource>(() => RemoteAuthDatasource(getIt()));
+  getIt.registerLazySingleton(() => AuthRepository(getIt(), getIt()));
   
   getIt.registerSingleton(FirebaseCrashlytics.instance);
   getIt.registerSingleton(AppCrashlytics(getIt()));

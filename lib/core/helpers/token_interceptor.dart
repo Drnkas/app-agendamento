@@ -7,7 +7,7 @@ class TokenInterceptor extends Interceptor{
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers['X-Parse-Session-Token'] = 'token';
+   // options.headers['X-Parse-Session-Token'] = 'token';
     handler.next(options);
   }
 }

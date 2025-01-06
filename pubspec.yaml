@@ -35,6 +35,7 @@ dependencies:
   dio:
   pretty_dio_logger:
   get_it:
+  shared_preferences:
   flutter_bloc: ^8.1.3
   bloc:
   equatable:
@@ -44,6 +45,7 @@ dependencies:
   firebase_messaging: ^15.1.6
   firebase_remote_config: 5.2.0
   package_info_plus: ^4.1.0
+  flutter_secure_storage:
 
 
 
