@@ -27,8 +27,8 @@ class _SplashPageState extends State<SplashPage> implements SplashPageActions {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: FlutterLogo(size: 150),
-      ),
+        child: BouncingLogo()
+      )
     );
   }
 
@@ -44,7 +44,7 @@ class _SplashPageState extends State<SplashPage> implements SplashPageActions {
 
   @override
   void navToAuth() {
-    context.go('/auth');
+    context.go(AppRoutes.auth);
   }
 
   @override
@@ -60,7 +60,58 @@ class _SplashPageState extends State<SplashPage> implements SplashPageActions {
   @override
   void dispose() {
     super.dispose();
-    cubit.dispose();
+    cubit.close();
   }
 
+}
+
+class BouncingLogo extends StatefulWidget {
+  const BouncingLogo({super.key});
+
+  @override
+  _BouncingLogoState createState() => _BouncingLogoState();
+}
+
+class _BouncingLogoState extends State<BouncingLogo>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    );
+
+    _controller.forward();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: AnimatedBuilder(
+          animation: _animation,
+          builder: (context, child) {
+            return Opacity(
+              opacity: _animation.value,
+              child: child,
+            );
+          },
+          child: Image.asset(
+            'assets/brand/logo_nome.png',
+            width: 300,
+            height: 300,
+          ),
+        ),
+      ),
+    );
+  }
 }

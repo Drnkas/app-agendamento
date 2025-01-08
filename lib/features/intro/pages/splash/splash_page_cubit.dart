@@ -55,10 +55,10 @@ class SplashPageCubit extends Cubit<SplashPageState> {
 
     final shouldShowOnboarding = _appPreferences.shouldShowOnboarding;
 
-    // if(shouldShowOnboarding) {
-    //   _actions?.navToOnboarding();
-    //   return;
-    // }
+    if(shouldShowOnboarding) {
+      _actions?.navToOnboarding();
+      return;
+    }
 
     final hasLoggedUser = results[1];
     if (hasLoggedUser) {
