@@ -1,4 +1,8 @@
+import 'package:app_agendamento/core/device/app_device_settings.dart';
 import 'package:app_agendamento/core/route/app_routes.dart';
+import 'package:app_agendamento/core/widgets/app_dialog_alert.dart';
+import 'package:app_agendamento/core/widgets/app_outlined_button.dart';
+import 'package:app_agendamento/di/di.dart';
 import 'package:app_agendamento/features/intro/pages/onboarding/onboarding_page_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +12,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_text_button.dart';
+import '../../widgets/intro_base_page.dart';
 import 'onboarding_page_cubit.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -43,32 +48,32 @@ class _OnboardingPageState extends State<OnboardingPage> implements OnboardingPa
             final pages = [
               OnboardingPageInfo(
                 title: 'Seja Bem-vindo(a)!',
-                description:
+                body:
                 'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques.',
-                imagePath: 'assets/onboarding/onboarding_2.svg',
+                imagePath: 'assets/intro/onboarding_2.svg',
               ),
               if(state.showLocationPage)
                 OnboardingPageInfo(
-                  title: 'Acesso à\n localização',
-                  description: 'Para facilitar a busca de profissionais em sua região.',
-                  imagePath: 'assets/onboarding/onboarding_0.svg',
-                  onNextPressed: cubit.requestLocationPermission
+                    title: 'Acesso à\n localização',
+                    body: 'Para facilitar a busca de profissionais em sua região.',
+                    imagePath: 'assets/intro/onboarding_0.svg',
+                    onNextPressed: cubit.requestLocationPermission
                 ),
               if(state.showNotificationPage)
                 OnboardingPageInfo(
-                  title: 'Ative as\n notificações',
-                  description:
-                  'Para receber avisos importantes sobre os seus agendamentos.',
-                  imagePath: 'assets/onboarding/onboarding_1.svg',
-                  onNextPressed: cubit.requestNotificationPermission
+                    title: 'Ative as\n notificações',
+                    body:
+                    'Para receber avisos importantes sobre os seus agendamentos.',
+                    imagePath: 'assets/intro/onboarding_1.svg',
+                    onNextPressed: cubit.requestNotificationPermission
                 ),
               OnboardingPageInfo(
-                title: 'Agende uma\n consulta',
-                description:
-                'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques.',
-                imagePath: 'assets/onboarding/onboarding_2.svg',
-                onNextPressed: cubit.finish,
-                customLabel: 'Finalizar'
+                  title: 'Agende uma\n consulta',
+                  body:
+                  'Você poderá encontrar profissionais em sua região e agendar uma consulta com poucos cliques.',
+                  imagePath: 'assets/intro/onboarding_2.svg',
+                  onNextPressed: cubit.finish,
+                  customLabel: 'Finalizar'
               ),
             ];
 
@@ -80,43 +85,10 @@ class _OnboardingPageState extends State<OnboardingPage> implements OnboardingPa
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       for (final p in pages)
-                        Padding(
-                          padding: const EdgeInsets.all(24),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                p.imagePath,
-                                height: 300,
-                              ),
-                              const SizedBox(height: 60),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16),
-                                child: Text(
-                                  p.title,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 36,
-                                    fontWeight: FontWeight.w700,
-                                    color: t.black,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              SizedBox(
-                                width: 300,
-                                child: Text(
-                                  p.description,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                        IntroBasePage(
+                          imagePath: p.imagePath,
+                          title: p.title,
+                          body: p.body,
                         ),
                     ],
                     onPageChanged: (p) {
@@ -146,7 +118,7 @@ class _OnboardingPageState extends State<OnboardingPage> implements OnboardingPa
                       Expanded(
                         child: AppButton(
                           label: pages[page].customLabel ?? 'Próximo',
-                          icon: Icon(Icons.arrow_forward_ios_rounded),
+                          icon: const Icon(Icons.arrow_forward_ios_rounded),
                           onPressed: () async {
                             await pages[page].onNextPressed?.call();
 
@@ -171,7 +143,23 @@ class _OnboardingPageState extends State<OnboardingPage> implements OnboardingPa
 
   @override
   Future<void> showDeniedForeverDialog() {
-    return showDialog(context: context, builder: (_) => const Dialog());
+    return showDialog(context: context, builder: (_) => AppAlertDialog(
+        title: 'Autorização negada',
+        body: 'Você não autorizou esta permissão. Acesse as configurações do seu dispositivo para permitir.',
+        actions: [
+          AppOutlinedButton(
+              label: 'Prosseguir mesmo assim',
+              onPressed: Navigator.of(context).pop
+          ),
+          AppButton(
+              label: 'Ir para as configurações',
+              onPressed: () async {
+                await getIt<AppDeviceSettings>().openSettings();
+                if(context.mounted) Navigator.of(context).pop();
+              }
+          )
+        ]
+    ));
   }
 
   @override
@@ -191,14 +179,14 @@ class _OnboardingPageState extends State<OnboardingPage> implements OnboardingPa
 class OnboardingPageInfo {
   OnboardingPageInfo({
     required this.title,
-    required this.description,
+    required this.body,
     required this.imagePath,
     this.onNextPressed,
     this.customLabel,
   });
 
   final String title;
-  final String description;
+  final String body;
   final String imagePath;
   final String? customLabel;
   final Function? onNextPressed;

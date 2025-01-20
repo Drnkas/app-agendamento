@@ -50,6 +50,8 @@ dependencies:
   device_preview:
   responsive_framework: ^0.1.9
   geolocator:
+  url_launcher:
+  store_redirect:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -81,7 +83,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/brand/
-    - assets/onboarding/
+    - assets/intro/
+    - assets/social/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

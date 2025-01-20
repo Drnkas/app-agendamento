@@ -7,6 +7,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'core/widgets/alert/alert_area.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
@@ -37,8 +38,15 @@ class App extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routerConfig: router,
         builder: (context, widget) {
+          final newChild = Stack(
+            children: [
+              if (widget != null) widget,
+              const AlertArea(),
+            ],
+          );
+
           return ResponsiveWrapper.builder(
-            ClampingScrollWrapper.builder(context, widget!),
+            ClampingScrollWrapper.builder(context, newChild),
             maxWidth: 1200,
             minWidth: 450,
             defaultScale: true,
@@ -53,7 +61,7 @@ class App extends StatelessWidget {
         },
         locale: DevicePreview.locale(context),
         theme: ThemeData.light().copyWith(
-            scaffoldBackgroundColor: Colors.white
+          scaffoldBackgroundColor: Colors.white,
         ),
       ),
     );
