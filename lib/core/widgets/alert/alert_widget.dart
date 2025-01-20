@@ -1,5 +1,7 @@
+import 'package:app_agendamento/core/theme/app_theme.dart';
 import 'package:app_agendamento/core/widgets/alert/alert_area_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../di/di.dart';
 
@@ -47,6 +49,8 @@ class _AlertWidgetState extends State<AlertWidget>
 
   @override
   Widget build(BuildContext context) {
+    final AppTheme t = context.watch();
+
     return AnimatedBuilder(
       animation: _controller,
       builder: (_, __) {
@@ -55,7 +59,10 @@ class _AlertWidgetState extends State<AlertWidget>
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(9),
-              color: const Color(0xffC3E9E9),
+              color:  switch(widget.alert.type) {
+                AlertType.error => t.errorSnackbar,
+                AlertType.success => t.sucessSnackbar,
+              },
             ),
             padding: const EdgeInsets.all(24),
             child: Row(
@@ -63,11 +70,20 @@ class _AlertWidgetState extends State<AlertWidget>
                 Expanded(
                   child: Text(
                     widget.alert.title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-                const Icon(
-                  Icons.check_circle_outline_outlined,
-                  color: Color(0xff1EE0CC),
+                 Icon(
+                   switch(widget.alert.type) {
+                     AlertType.error => Icons.cancel_outlined,
+                     AlertType.success => Icons.check_circle_outline_outlined,
+                   },
+                  color: switch(widget.alert.type) {
+                    AlertType.error => t.error,
+                    AlertType.success => Colors.white,
+                  },
                 )
               ],
             ),

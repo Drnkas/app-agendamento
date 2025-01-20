@@ -8,6 +8,10 @@ class AppTheme{
   final details = Color(0xFF44acbc);
   final lightGray = Color(0xFFF0f3F6);
   final black = const Color(0xff0D3F67);
+  final  error =  const Color(0xFFCF0303);
+  final  errorSnackbar = const Color(0xFFF66464);
+  final success = const Color(0xFF86D185).withAlpha(180);
+  final sucessSnackbar = const Color(0xFF86D185).withAlpha(180);
 
   static const text = Color(0xFF475467);
   static const priceText = Color(0xFF3A3A40);
@@ -15,10 +19,7 @@ class AppTheme{
   static const inputText = Color(0xFF667085);
   static const greyButton = Color(0xFF868E96);
   static const selectedFilter = Color(0xFFCED4DA);
-  static final success = const Color(0xFF86D185).withAlpha(180);
-  static final sucessSnackbar = const Color(0xFF86D185).withAlpha(180);
-  static const error = Color(0xFFCF0303);
-  static const errorSnackbar = Color(0xFFF66464);
+
   static const warning = Color(0xFFFFAE0D);
   static const background = Color(0xFFFAFAFA);
   static const backgroundCard = Color(0xFFF8F9FA);

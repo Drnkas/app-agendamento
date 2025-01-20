@@ -1,7 +1,6 @@
 import 'package:app_agendamento/features/intro/pages/splash/splash_page_actions.dart';
 import 'package:app_agendamento/features/intro/pages/splash/splash_page_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/route/app_routes.dart';
@@ -44,7 +43,7 @@ class _SplashPageState extends State<SplashPage> implements SplashPageActions {
 
   @override
   void navToAuth() {
-    context.go('/AppRoutes.auth');
+    context.go(AppRoutes.auth);
   }
 
   @override

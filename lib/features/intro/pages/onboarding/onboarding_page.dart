@@ -172,7 +172,7 @@ class _OnboardingPageState extends State<OnboardingPage> implements OnboardingPa
 
   @override
   void navToAuth() {
-    context.go(AppRoutes.auth);
+    context.go('/AppRoutes.auth');
   }
 }
 
