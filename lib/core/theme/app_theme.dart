@@ -12,6 +12,36 @@ class AppTheme{
   final  errorSnackbar = const Color(0xFFF66464);
   final success = const Color(0xFF86D185).withAlpha(180);
   final sucessSnackbar = const Color(0xFF86D185).withAlpha(180);
+  final gray = const Color(0xffB6C5D1);
+
+
+  late final label11Bold = TextStyle(
+    fontSize: 11,
+    color: black,
+    fontWeight: FontWeight.bold,
+  );
+
+  late final field15 = TextStyle(
+    fontSize: 15,
+    color: black,
+  );
+
+  late final body16 = TextStyle(
+    fontSize: 16,
+    color: black,
+  );
+
+  late final body16Bold = TextStyle(
+    fontSize: 16,
+    color: black,
+    fontWeight: FontWeight.bold,
+  );
+
+  late final heading36Bold = TextStyle(
+    fontSize: 36,
+    color: black,
+    fontWeight: FontWeight.bold,
+  );
 
   static const text = Color(0xFF475467);
   static const priceText = Color(0xFF3A3A40);

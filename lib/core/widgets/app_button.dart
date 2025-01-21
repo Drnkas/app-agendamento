@@ -52,8 +52,8 @@ class _AppButtonState extends State<AppButton> {
               const SizedBox(width: 24),
 
             Expanded(child: Center(child: Text(widget.label))),
+
             if (widget.icon != null)
-              const SizedBox(width: 24),
               widget.icon!,
           ]
       ),

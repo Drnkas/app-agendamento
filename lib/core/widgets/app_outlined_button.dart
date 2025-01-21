@@ -33,7 +33,7 @@ class AppOutlinedButton extends StatelessWidget {
           }
           return BorderSide(color: t.primary);
         }),
-        minimumSize: WidgetStateProperty.all(const Size(128, 64)),
+        minimumSize: WidgetStateProperty.all(const Size(128, 54)),
         textStyle: WidgetStateProperty.all(
           const TextStyle(
             fontSize: 15,

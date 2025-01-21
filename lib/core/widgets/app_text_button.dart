@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppTextButton extends StatelessWidget {
-  const AppTextButton({super.key, required this.label, this.onPressed});
+  const AppTextButton({super.key, required this.label, this.onPressed, this.color});
 
   final String label;
   final VoidCallback? onPressed;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class AppTextButton extends StatelessWidget {
           padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 16)),
           foregroundColor: WidgetStateColor.resolveWith((states) {
             if(states.contains(WidgetState.disabled)){
-              return t.lightGray;
+              return color ?? t.lightGray;
             } else {
               return t.darkPrimary;
             }

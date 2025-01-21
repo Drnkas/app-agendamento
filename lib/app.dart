@@ -3,6 +3,7 @@ import 'package:app_agendamento/core/route/app_routes.dart';
 import 'package:app_agendamento/core/theme/app_theme.dart';
 import 'package:app_agendamento/di/di.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,6 +21,10 @@ void bootstrap(FlavorConfig config) async {
   );
 
   await configureDependencies(config);
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp
+  ]);
 
   runApp(DevicePreview(
     builder: (_) => const App(),

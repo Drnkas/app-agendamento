@@ -1,14 +1,13 @@
 import 'package:app_agendamento/core/device/app_device_settings.dart';
-import 'package:app_agendamento/core/route/app_routes.dart';
 import 'package:app_agendamento/core/widgets/app_dialog_alert.dart';
 import 'package:app_agendamento/core/widgets/app_outlined_button.dart';
 import 'package:app_agendamento/di/di.dart';
 import 'package:app_agendamento/features/intro/pages/onboarding/onboarding_page_actions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/route/app_routes.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_text_button.dart';
@@ -172,7 +171,7 @@ class _OnboardingPageState extends State<OnboardingPage> implements OnboardingPa
 
   @override
   void navToAuth() {
-    context.go('/AppRoutes.auth');
+    context.go(AppRoutes.auth);
   }
 }
 
