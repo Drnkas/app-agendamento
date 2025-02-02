@@ -13,6 +13,7 @@ class AppTextField extends StatefulWidget {
     this.initialText,
     this.obscure = false,
     this.inputFormatters,
+    this.error,
   });
 
   final String title;
@@ -22,6 +23,7 @@ class AppTextField extends StatefulWidget {
   final TextInputType? textInputType;
   final bool obscure;
   final List<TextInputFormatter>? inputFormatters;
+  final String? error;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -46,11 +48,26 @@ class _AppTextFieldState extends State<AppTextField> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 8),
-                  child: Text(
-                    widget.title,
-                    textAlign: TextAlign.start,
-                    style: t.label11Bold,
+                  padding: const EdgeInsets.only(left: 20, top: 8, right: 20),
+                  child: Row(
+                    children: [
+                      Text(
+                        widget.title,
+                        textAlign: TextAlign.start,
+                        style: t.label11Bold,
+                      ),
+                      if(widget.error != null)
+                        Expanded(
+                            child: Text(
+                              widget.error!,
+                              textAlign: TextAlign.end,
+                              style: t.label11.copyWith(
+                                  color: t.error,
+                                fontWeight: FontWeight.w500
+                              ),
+                            )
+                        )
+                    ],
                   ),
                 ),
                 TextFormField(

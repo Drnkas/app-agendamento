@@ -14,6 +14,10 @@ class AppTheme{
   final sucessSnackbar = const Color(0xFF86D185).withAlpha(180);
   final gray = const Color(0xffB6C5D1);
 
+  late final label11 = TextStyle(
+    fontSize: 11,
+    color: black,
+  );
 
   late final label11Bold = TextStyle(
     fontSize: 11,

@@ -28,7 +28,7 @@ void bootstrap(FlavorConfig config) async {
 
   runApp(DevicePreview(
     builder: (_) => const App(),
-    enabled: true //config.flavor == AppFlavor.dev,
+    enabled: false //config.flavor == AppFlavor.dev,
   ));
 }
 
