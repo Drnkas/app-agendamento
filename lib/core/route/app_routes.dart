@@ -1,6 +1,7 @@
 import 'package:app_agendamento/features/auth/pages/auth/auth_page.dart';
+import 'package:app_agendamento/features/auth/pages/login/login_page.dart';
+import 'package:app_agendamento/features/home/pages/home_page.dart';
 import 'package:app_agendamento/features/intro/pages/onboarding/onboarding_page.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/pages/sign_up/signup_page.dart';
@@ -33,6 +34,10 @@ final router = GoRouter(
           path: AppRoutes.signUp.path,
           builder: (context, state) => const SignUpPage(),
         ),
+        GoRoute(
+          path: AppRoutes.login.path,
+          builder: (context, state) => const LoginPage(),
+        ),
       ],
     ),
     GoRoute(
@@ -42,6 +47,10 @@ final router = GoRouter(
     GoRoute(
       path: AppRoutes.forceUpdate,
       builder: (context, state) => const ForceUpdatePage(),
+    ),
+    GoRoute(
+      path: AppRoutes.home,
+      builder: (context, state) => const Homepage(),
     ),
 
   ],
@@ -58,6 +67,11 @@ class AppRoutes {
   static const AppRoute signUp = AppRoute(
     fullPath: '/auth/signup',
     path: 'signup',
+  );
+
+  static const AppRoute login = AppRoute(
+    fullPath: '/auth/login',
+    path: 'login',
   );
 }
 

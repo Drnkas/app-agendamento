@@ -10,6 +10,7 @@ import 'package:app_agendamento/core/firebase/remote_config/app_remote_config.da
 import 'package:app_agendamento/core/flavor/flavor.dart';
 import 'package:app_agendamento/core/widgets/alert/alert_area_cubit.dart';
 import 'package:app_agendamento/features/auth/data/auth_repository.dart';
+import 'package:app_agendamento/features/auth/session/session_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -67,4 +68,6 @@ Future<void> configureDependencies(FlavorConfig config) async {
   getIt.registerFactory(() => AppLocation());
   getIt.registerFactory(() => AppDeviceSettings());
   getIt.registerFactory(() => AppExternalLauncher());
+
+  getIt.registerSingleton(SessionCubit());
 }

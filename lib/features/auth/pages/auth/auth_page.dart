@@ -1,5 +1,3 @@
-
-import 'package:app_agendamento/app.dart';
 import 'package:app_agendamento/core/route/app_routes.dart';
 import 'package:app_agendamento/core/widgets/app_button.dart';
 import 'package:app_agendamento/core/widgets/app_outlined_button.dart';
@@ -48,7 +46,10 @@ class _AuthPageState extends State<AuthPage> {
                   ),
                 ),
                 const SizedBox(height: 32),
-                AppButton(label: 'Entrar', onPressed: () {},),
+                AppButton(
+                    label: 'Entrar',
+                    onPressed: () => context.push(AppRoutes.login.fullPath)
+                ),
                 const SizedBox(height: 32),
                 AppOutlinedButton(
                     label: 'Cadastre-se',
@@ -66,6 +67,7 @@ class _AuthPageState extends State<AuthPage> {
                 AppTextButton(
                   label: 'Entrar como visitante',
                   color: t.primary,
+                  onPressed: () => context.push(AppRoutes.home),
                 ),
 
                 const SizedBox(height: 32),

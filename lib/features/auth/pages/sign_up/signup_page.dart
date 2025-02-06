@@ -1,7 +1,6 @@
 import 'package:app_agendamento/core/route/app_routes.dart';
 import 'package:app_agendamento/core/theme/app_theme.dart';
 import 'package:app_agendamento/core/widgets/app_base_page.dart';
-import 'package:app_agendamento/core/widgets/app_icon_button.dart';
 import 'package:app_agendamento/core/widgets/app_text_field.dart';
 import 'package:app_agendamento/features/auth/pages/sign_up/sign_up_actions.dart';
 import 'package:app_agendamento/features/auth/pages/sign_up/signup_page_cubit.dart';

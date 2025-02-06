@@ -18,4 +18,8 @@ class AppSecureStorage {
       value: token,
     );
   }
+
+  Future<void> deleteSessionToken() {
+    return _secureStorage.delete(key: AppSecureStorageKeys.sessionToken.name);
+  }
 }

@@ -1,4 +1,3 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:formz/formz.dart';
 

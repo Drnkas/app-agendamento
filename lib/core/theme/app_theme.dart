@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppTheme{
-  final primary = Color(0xFF0d8cac);
-  final darkPrimary = Color(0xFF05445e);
-  final secondary = Color(0xFF79c2b6);
-  final light = Color(0xFFc9e7e8);
-  final details = Color(0xFF44acbc);
-  final lightGray = Color(0xFFF0f3F6);
+  final primary = const Color(0xFF0d8cac);
+  final darkPrimary = const Color(0xFF05445e);
+  final secondary = const Color(0xFF79c2b6);
+  final light = const Color(0xFFc9e7e8);
+  final details = const Color(0xFF44acbc);
+  final lightGray = const Color(0xFFF0f3F6);
   final black = const Color(0xff0D3F67);
   final  error =  const Color(0xFFCF0303);
   final  errorSnackbar = const Color(0xFFF66464);
@@ -43,6 +43,12 @@ class AppTheme{
 
   late final heading36Bold = TextStyle(
     fontSize: 36,
+    color: black,
+    fontWeight: FontWeight.bold,
+  );
+
+  late final heading24Bold = TextStyle(
+    fontSize: 24,
     color: black,
     fontWeight: FontWeight.bold,
   );

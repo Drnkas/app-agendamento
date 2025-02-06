@@ -6,11 +6,11 @@ import '../theme/app_theme.dart';
 
 class AppAlertDialog extends StatelessWidget {
   const AppAlertDialog({
-    Key? key,
+    super.key,
     required this.title,
     required this.body,
     required this.actions,
-  }) : super(key: key);
+  });
 
   final String title;
   final String body;

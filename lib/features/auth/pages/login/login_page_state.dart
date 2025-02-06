@@ -1,52 +1,40 @@
 part of 'login_page_cubit.dart';
 
-enum LoginPageStatus{initial, loading, failure, success}
 
 class LoginPageState extends Equatable {
   const LoginPageState({
-    this.email = '',
-    this.password = '',
-    this.status = LoginPageStatus.initial,
+    required this.email,
+    required this.password,
+    required this.isLoading,
   });
 
-  final LoginPageStatus status;
-  final String email;
-  final String password;
+  const LoginPageState.empty()
+      : email = const Email.pure(),
+        password = const Password.pure(validateLength: false),
+        isLoading = false;
 
+  final Email email;
+  final Password password;
+  final bool isLoading;
+
+  bool get isValid => Formz.validate([
+    email,
+    password
+  ]);
 
   @override
-  List<Object?> get props => [email, password, status];
+  List<Object?> get props => [email, password, isLoading];
 
   // faz com que copie o objeto alterando o valor, caso não passe aqui a propiedade ela não será alterada
   LoginPageState copyWith({
-    LoginPageStatus? status,
-    String? email,
-    String? password,
+    Email? email,
+    Password? password,
+    bool? isLoading,
   }) {
     return LoginPageState(
-      status: status ?? this.status,
       email: email ?? this.email,
       password: password ?? this.password,
+      isLoading: isLoading ?? this.isLoading,
     );
   }
 }
-
-// final class LoginPageInitial extends LoginPageState {
-//   @override
-//   List<Object> get props => [];
-// }
-//
-// final class LoginPageLoading extends LoginPageState {
-//   @override
-//   List<Object> get props => [];
-// }
-//
-// final class LoginPageFailure extends LoginPageState {
-//   @override
-//   List<Object> get props => [];
-// }
-//
-// final class LoginPageSuccess extends LoginPageState {
-//   @override
-//   List<Object> get props => [];
-// }

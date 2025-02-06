@@ -15,13 +15,11 @@ class AuthRepository {
   final AuthDatasource _datasource;
   final AppSecureStorage _appSecureStorage;
 
-  User? user;
-
   Future<Result<LoginFailed, User>> login({required String email, required String password}) async {
     final result = await _datasource.login(email: email, password: password);
 
     if(result case Success(object: final user)){
-      this.user = user;
+      await _appSecureStorage.saveSessionToken(user.token);
     }
 
     return result;
@@ -30,10 +28,8 @@ class AuthRepository {
   Future<Result<SignUpFailed, User>> signUp(SignUpDto signUpDto) async {
     final result = await _datasource.signUp(signUpDto);
     if(result case Success(object: final user)) {
-      this.user = user;
       await _appSecureStorage.saveSessionToken(user.token);
     }
-    print(result);
     return result;
   }
 
@@ -42,13 +38,11 @@ class AuthRepository {
     if(token == null) {
       return const Failure(ValidateTokenFailed.invalidToken);
     }
-    final result = await _datasource.validateToken(token);
+    return _datasource.validateToken(token);
+  }
 
-    if (result case Success(object: final user)){
-      this.user = user;
-    }
-
-    return result;
+  Future<void> logout() {
+    return _appSecureStorage.deleteSessionToken();
   }
 
 }
