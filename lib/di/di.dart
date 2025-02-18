@@ -39,7 +39,7 @@ Future<void> configureDependencies(FlavorConfig config) async {
           }))..interceptors.addAll([
     TokenInterceptor(),
 
-    if(config.flavor == AppFlavor.dev)
+    //if(config.flavor == AppFlavor.dev)
     PrettyDioLogger(requestHeader: true, requestBody: true),
   ]));
 

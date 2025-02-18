@@ -25,6 +25,12 @@ class AppTheme{
     fontWeight: FontWeight.bold,
   );
 
+  late final body13Bold = TextStyle(
+    fontSize: 13,
+    color: black,
+    fontWeight: FontWeight.bold,
+  );
+
   late final field15 = TextStyle(
     fontSize: 15,
     color: black,

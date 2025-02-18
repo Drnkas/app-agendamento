@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/theme/app_theme.dart';
-import '../sections/home_next_schedules_section.dart';
+import '../sections/next_schedules/home_next_schedules_section.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
