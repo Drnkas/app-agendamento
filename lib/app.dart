@@ -5,6 +5,7 @@ import 'package:app_agendamento/di/di.dart';
 import 'package:app_agendamento/features/auth/session/session_cubit.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +45,14 @@ class App extends StatelessWidget {
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: router,
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('pt', 'BR')
+          ],
           builder: (context, widget) {
             final newChild = Stack(
               children: [

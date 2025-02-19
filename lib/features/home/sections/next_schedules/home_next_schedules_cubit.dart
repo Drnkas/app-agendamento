@@ -16,20 +16,27 @@ class HomeNextSchedulesCubit extends Cubit<HomeNextSchedulesState> {
   final SchedulingRepository _repository;
 
   Future<void> loadSchedulings() async {
+    emit(state.copyWith(status: HomeNextSchedulesStatus.loading));
+
     final result = await _repository.getUserSchedules();
-    (switch(result) {
-      Success(: final object) => emit(
-          state.copyWith(
-              status: HomeNextSchedulesStatus.success,
-              schedulings: object
-          )
-      ),
-      Failure() => emit(
-          state.copyWith(
-              status: HomeNextSchedulesStatus.error
-          )
-      ),
-    }
+    (
+        switch(result) {
+          Success(: final object) => emit(
+              state.copyWith(
+                  status: HomeNextSchedulesStatus.success,
+                  schedulings: object
+              )
+          ),
+          Failure() => emit(
+              state.copyWith(
+                  status: HomeNextSchedulesStatus.error
+              )
+          ),
+        }
     );
+  }
+
+  void setUserNotLoggedIn() {
+    emit(state.copyWith(status: HomeNextSchedulesStatus.notLoggedIn));
   }
 }
